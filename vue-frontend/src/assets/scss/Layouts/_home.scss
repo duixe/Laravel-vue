@@ -1,0 +1,17 @@
+.homes {
+    background-color: $color-white;
+    width: 100vw;
+    // height: calc(100vh - 100px);
+    height: calc(100vh - 100px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem 2%;
+    margin-top: 10rem;
+
+    @include respond(phone) {
+        height: 100vh;
+        margin-top: 0;
+        justify-content: center;
+    }
+}

@@ -1,0 +1,70 @@
+.btn {
+    
+    &,
+    &:link,
+    &:visited {
+        text-transform: uppercase;
+        text-decoration: none;
+        padding: 1.2rem 3rem;
+        display: inline-block;
+        border-radius: 1rem;
+        transition: all .2s;
+        position: relative;
+        font-size: 1.6rem;
+        outline: 0 !important;
+
+
+        @include respond(phone) {
+            padding: 2rem 3rem;
+        }
+
+        //style for button inside form
+        border: none;
+        cursor: pointer;
+    }
+
+    &::after,
+    &::before {
+        content: "";
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: 1rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        transition: all .4s;
+        font-size: 1.6rem;
+    }
+
+
+    &-dark {
+        position: relative;
+        background: $color-dark;
+        background-clip: padding-box;
+        @include customFont($font-ubuntu-mono, $color-white, 400, 1.8rem);
+        box-shadow: 0 1rem 1rem rgba($color-black, .2);
+        transition: background .6 ease;
+       
+        &::after {
+            background-color: $color-dark !important;
+        }
+
+        &:hover {
+            background: $color-black;
+            color: $color-white !important;
+            background-clip: padding-box;
+        }
+
+        // @include buttonafter;
+       
+    }
+
+    &Animate {
+        &::after,
+        &::before {
+            animation: pulse 2s ease-out infinite 
+        }
+    }
+}
