@@ -4,6 +4,7 @@
     // height: calc(100vh - 100px);
     height: calc(100vh - 100px);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 2rem 2%;
@@ -13,5 +14,44 @@
         height: 100vh;
         margin-top: 0;
         justify-content: center;
+    }
+}
+
+.task {
+    // width: 60%;
+    margin: 2rem auto;
+    background: $color-white;
+    padding: 1rem 2rem;
+    border-radius: 4px;
+    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.5);
+    border-left: 4px solid #e90074;
+
+    .actions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        h3 {
+            cursor: pointer;
+            @include customFont($font-poppins, $color-base-dark, 500, 1.8rem);
+        }
+
+        .icons {
+
+            .material-icons {
+                font-style: 2.4rem;
+                margin-left: 1rem;
+                color: #bbb;
+                cursor: pointer;
+
+                &:hover {
+                    color: #777;
+                }
+            }
+        }
+    }
+
+    P {
+        @include customFont($font-poppins, $color-base-dark, 300, 1.2rem);
     }
 }

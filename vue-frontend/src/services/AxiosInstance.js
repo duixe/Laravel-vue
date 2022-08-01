@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from '../src/store/store';
+import store from '../store/store';
 import {GET_USER_TOKEN_GETTER} from '../src/store/storeconstants'
 
 const axiosInstance = axios.create({
@@ -14,4 +14,4 @@ axiosInstance.interceptors.request.use(
       return config;
     });
   
-  export default axiosInstance;
+export default axiosInstance;
