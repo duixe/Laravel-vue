@@ -38,6 +38,42 @@
         font-size: 1.6rem;
     }
 
+    &-secondary {
+        background: transparent;
+        background-clip: padding-box;
+        @include customFont($font-ubuntu-mono, $color-dark, 400, 1.8rem);
+        transition: all .6 ease;
+        border: 1.5px solid $color-dark !important;
+
+
+        &:hover {
+            background: $color-dark;
+            color: $color-white !important;
+            box-shadow: 0 1rem 1rem rgba($color-black, .2);
+        }
+
+        // @include buttonafter;
+
+    }
+
+    &-nav {
+        background: transparent;
+        background-clip: padding-box;
+        @include customFont($font-ubuntu-mono, #bbb, 400, 1.8rem);
+        transition: all .6 ease;
+        border: .5px solid #bbb;
+
+
+        // &:hover {
+        //     background: $color-dark;
+        //     color: $color-white !important;
+        //     box-shadow: 0 1rem 1rem rgba($color-black, .2);
+        // }
+
+        // @include buttonafter;
+
+    }
+
 
     &-dark {
         position: relative;

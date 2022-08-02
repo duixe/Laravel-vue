@@ -21,7 +21,7 @@ class TaskFactory extends Factory
             'user_id' => User::factory(),
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'status' => $this->faker->randomElement(['selected', 'in_progress', 'completed']),
+            'completed' => $this->faker->randomElement([true, false]),
         ];
     }
 }

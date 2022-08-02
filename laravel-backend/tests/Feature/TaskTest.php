@@ -44,7 +44,7 @@ class TaskTest extends TestCase
         $input = [
             'title' => 'IO first task',
             'description' => 'A fullstack app creation task',
-            'status' => 'completed'
+            'completed' => true
         ];
         
         $response = $this->json('POST', route('tasks.store'), $input);
@@ -82,12 +82,12 @@ class TaskTest extends TestCase
         $task = Task::factory()->create([
             'user_id' => $this->authUser()->id,
             'title' => 'new title',
-            'status' => 'in_progress'
+            'completed' => false
         ]);
 
         $input = [
             'title' => 'new title',
-            'status' => 'completed'
+            'completed' => true
         ];
         
         $response = $this->json('PATCH', route('tasks.update', $task->id), $input);
@@ -107,12 +107,12 @@ class TaskTest extends TestCase
     {
         $task = Task::factory()->create([
             'title' => 'new title',
-            'status' => 'in_progress'
+            'completed' => false
         ]);
 
         $input = [
             'title' => 'new title',
-            'status' => 'completed'
+            'completed' => true
         ];
         
         $response = $this->json('PATCH', route('tasks.update', $task->id), $input);

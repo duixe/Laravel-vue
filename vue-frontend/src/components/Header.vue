@@ -3,7 +3,8 @@
     <img class="header__logo" src="../assets/img/io.png" alt="io-logo" />
     <nav class="nav">
       <ul class="nav__links">
-        <li disabled><router-link to="/" v-if="isUserAuthenticated">Dashboard 📋</router-link></li>
+        <li disabled><router-link to="/" v-if="isUserAuthenticated">All Task 📋</router-link></li>
+         <li disabled><router-link to="/add" v-if="isUserAuthenticated">Add Task +</router-link></li>
         <li><router-link to="/register" v-if="!isUserAuthenticated">Sign Up </router-link></li>
         <li><router-link to="/login" v-if="!isUserAuthenticated">Log in</router-link></li>
       </ul>
@@ -26,7 +27,7 @@ import { IS_USER_AUTHENTICATED_GETTER, LOGOUT_ACTION } from '../store/storeconst
 export default {
   computed: {
     ...mapGetters('auth', {
-      isUserAuthenticated: IS_USER_AUTHENTICATED_GETTER
+      isUserAuthenticated: IS_USER_AUTHENTICATED_GETTER,
     })
   },
   methods: {

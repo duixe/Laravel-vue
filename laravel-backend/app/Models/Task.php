@@ -19,7 +19,18 @@ class Task extends Model
     protected $fillable = [
         'title',
         'description',
-        'status',
+        'completed',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'completed' => 'boolean',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime', 
     ];
 
     /**

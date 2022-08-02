@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title');
             $table->string('description')->nullable();
-            $table->enum('status', ['not_selected', 'selected', 'in_progress', 'completed'])->default('not_selected');
+            $table->boolean('completed')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

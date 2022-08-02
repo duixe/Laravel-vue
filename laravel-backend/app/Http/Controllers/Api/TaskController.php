@@ -66,6 +66,11 @@ class TaskController extends Controller
      */
     public function update(TaskRequest $request, Task $task)
     {
+        $request->validate([
+            'title' => ['filled'],
+            'description' => ['filled'],
+            'completed' => ['sometimes']
+        ]);
         $this->taskRepository->update($request->validated(), $task);
         return  new TaskResource($task->refresh()); 
     }

@@ -15,10 +15,21 @@
         margin-top: 0;
         justify-content: center;
     }
+
+    &__task {
+        max-width: 75%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 .task {
-    // width: 60%;
+    // width: 100%;
+    position: relative;
+    max-width: 70rem;
+    min-width: 70rem;
     margin: 2rem auto;
     background: $color-white;
     padding: 1rem 2rem;
@@ -33,10 +44,12 @@
 
         h3 {
             cursor: pointer;
-            @include customFont($font-poppins, $color-base-dark, 500, 1.8rem);
+            margin-bottom: 2rem;
+            @include customFont($font-poppins, $color-dark, 500, 1.8rem);
         }
 
         .icons {
+            line-height: 4rem;
 
             .material-icons {
                 font-style: 2.4rem;
@@ -52,6 +65,28 @@
     }
 
     P {
-        @include customFont($font-poppins, $color-base-dark, 300, 1.2rem);
+        @include customFont($font-poppins, $color-base-dark, 300, 1.4rem);
+    }
+
+    &.completed {
+        border-left: 4px solid greenyellow;
+    }
+}
+
+.filter-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+
+        &:not(:last-child) {
+            margin-right: 2rem;
+        }
+
+        &.active {
+            color: $color-dark !important;
+            border-color: $color-dark !important;
+        }
     }
 }

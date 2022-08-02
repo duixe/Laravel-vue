@@ -1,14 +1,16 @@
 <template>
-  <div class="task">
+  <div class="task" :class="{completed: task.complete}">
       <div class="actions">
           <h3 @click.prevent="showDesc = !showDesc">{{ task.title }}</h3>
           <div class="icons">
-              <span class="material-icons">edit</span>
-               <span @click.prevent="deleteTask()" class="material-icons">delete</span>
+              <router-link :to="{name: 'EditTask', params: { id: task.id }}">
+                <span class="material-icons">edit</span>
+              </router-link>
+              <span @click.prevent="deleteTask()" class="material-icons">delete</span>
               <span @click.prevent="statusComplete()" class="material-icons">done</span>
           </div>
       </div>
-      <div v-if="showDesc">
+      <div class="description" v-if="showDesc">
           <p>{{ task.description }}</p>
       </div>
   </div>
@@ -38,13 +40,13 @@ export default {
         },
 
         async statusComplete() {
-            const body = {
-                status: this.task.status
+            let body = {
+                completed: !this.task.completed
             };
 
             try {
-                const res = await axios.patch(`/tasks/${this.task.id}`, body);
-                this.$emit('removeTask', this.task.id);
+                await axios.patch(`/tasks/${this.task.id}`, body);
+                this.$emit('complete', this.task.id);
             } catch (err) {
                 console.log(err)
             }
