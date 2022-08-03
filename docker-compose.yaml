@@ -1,0 +1,51 @@
+version: "3.7"
+
+services:
+  backend:
+    build:
+      context: ./laravel-backend
+      dockerfile: Dockerfile
+    environment:
+      DB_HOST: db
+      DB_DATABASE: task_app
+      DB_USERNAME: root
+      DB_PASSWORD: password
+    volumes:
+      - .dbdata:/var/lib/mysql
+    ports:
+      - 8000:8000
+    volumes:
+      - ./laravel-backend:/app/laravel-backend
+    depends_on:
+      - db
+    networks:
+      - app
+
+  frontend:
+    build:
+      context: ./vue-frontend
+      dockerfile: Dockerfile
+    tty: true
+    ports:
+      - 3000:3000
+    volumes:
+      - ./vue-frontend:/app/vue-frontend
+    depends_on:
+      - backend
+    networks:
+      - app
+
+  db:
+    image: mysql:5.7.22
+    environment:
+      MYSQL_DATABASE: "task_app"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "password"
+      MYSQL_ROOT_PASSWORD: "password"
+
+      networks:
+        - app
+
+networks:
+  app:
+    driver: bridge

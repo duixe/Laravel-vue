@@ -13,7 +13,7 @@ export default{
         let cp = state.tasks.find((task) => {
             return task.id === payload.id;
           })
-console.log(cp);
+
           cp.complete = !cp.complete;
     }
 }
