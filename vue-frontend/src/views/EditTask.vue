@@ -40,6 +40,8 @@
 
 <script>
 import axios from 'axios';
+import { mapActions } from 'vuex';
+import { UPDATE_TASK_ACTION } from '../store/storeconstants';
 export default {
     props: ['id'],
     data() {
@@ -60,19 +62,26 @@ export default {
           });
     },
      methods: {
+         ...mapActions('task', {
+             update: UPDATE_TASK_ACTION
+         }),
         async handleSubmit() {
+
             let data = {
                 title: this.title,
                 description: this.description,
+                id: this.id
             }
 
             try {
-                await axios.patch(`/tasks/${this.id}`, data);
-                this.$router.push('/');
-            } catch (err) {
-                console.log(err);
+                await this.update(data);
+            } catch (error) {
+                 console.log(err);
             }
+
+            this.$router.push('/');
         }
+
     }
 }
 </script>

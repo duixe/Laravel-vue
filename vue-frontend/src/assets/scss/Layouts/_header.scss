@@ -66,27 +66,53 @@
     }
 
     &__socials {
-       
         
-        &-link {
-            transition: all .2s ease 0s;
+        // &-link {
+        //     transition: all .2s ease 0s;
             
-        }
+        // }
 
-        &-icon {
-            width: 2.7rem;
-            height: 2.7rem;
-            fill: $color-pink;
-            transition: all .2s ease 0s;
+        // &-icon {
+        //     width: 2.7rem;
+        //     height: 2.7rem;
+        //     fill: $color-pink;
+        //     transition: all .2s ease 0s;
 
-            &:not(last-child) {
-                margin-right: 1.4rem;
-            }
+        //     &:not(last-child) {
+        //         margin-right: 1.4rem;
+        //     }
 
-            &:hover {
-                transform: translateY(-10%);
-            }
-        }
+        //     &:hover {
+        //         transform: translateY(-10%);
+        //     }
+        // }
+    
+
+        // &__profile {
+        //         display: flex;
+        //         flex-direction: column;
+        //         justify-content: center;
+        //         align-items: center;
+        //         // margin-bottom: 12rem;
+        //         // margin-top: -4.5rem;
+        //         position: static;
+
+        //         &-img {
+        //             width: 5rem;
+        //             height: 5rem;
+        //             // background-color: blue;
+        //             border-radius: 50%;
+        //             box-shadow: 0 1rem 2rem rgba($color-black, .1);
+        //         }
+
+        //         h3 {
+        //             display: none;
+        //             margin-left: .5rem;
+        //             width: auto;
+        //             text-align: center;
+        //             @include customFont($font-poppins, $color-dark, 500, 1rem);
+        //         }
+        // }
     }
 
 }

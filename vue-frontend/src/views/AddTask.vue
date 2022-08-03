@@ -40,6 +40,8 @@
 
 <script>
 import axios from 'axios';
+import { mapActions } from 'vuex';
+import { CREATE_TASK_ACTION } from '../store/storeconstants';
 export default {
     data() {
         return {
@@ -48,18 +50,22 @@ export default {
         }
     },
     methods: {
+        ...mapActions('task', {
+            saveTask: CREATE_TASK_ACTION,
+        }),
         async handleSubmit() {
             let data = {
                 title: this.title,
-                description: this.description,
+                description: this.description
             }
 
             try {
-                await axios.post('/tasks', data);
-                this.$router.push('/');
+                await this.saveTask(data);
             } catch (err) {
-                console.log(err);
+                console.log(err)
             }
+
+            this.$router.push('/');
         }
     }
 }

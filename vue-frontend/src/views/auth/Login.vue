@@ -92,10 +92,5 @@ export default {
 
         }
     }
-    // computed: {
-    //     ...mapState('auth', {
-    //         name: (state) => state.name
-    //     })
-    // }
 }
 </script>

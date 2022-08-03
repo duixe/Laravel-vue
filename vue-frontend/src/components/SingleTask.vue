@@ -18,6 +18,8 @@
 
 <script>
 import axios from 'axios';
+import { mapActions } from 'vuex';
+import { DELETE_TASK_ACTION, UPDATE_COMPLETE_STATUS } from '../store/storeconstants';
 export default {
     props: ["task"],
     data() {
@@ -26,14 +28,17 @@ export default {
         }
     },
     methods: {
+        ...mapActions('task', {
+            delete: DELETE_TASK_ACTION,
+            taskCompleted: UPDATE_COMPLETE_STATUS
+        }),
         async deleteTask() {
             const param = {
                 id: this.task.id
             };
 
             try {
-                const res = await axios.delete(`/tasks/${this.task.id}`);
-                this.$emit('removeTask', this.task.id);
+                await this.delete(param);
             } catch (err) {
                 console.log(err)
             }
@@ -41,15 +46,18 @@ export default {
 
         async statusComplete() {
             let body = {
-                completed: !this.task.completed
-            };
+                completed: !this.task.completed,
+                id: this.task.id
+            }
 
             try {
-                await axios.patch(`/tasks/${this.task.id}`, body);
-                this.$emit('complete', this.task.id);
+                await this.taskCompleted(body);
+                // this.$emit('complete', this.task.id);
             } catch (err) {
                 console.log(err)
             }
+
+            console.log('got here');
         }
     }
 }

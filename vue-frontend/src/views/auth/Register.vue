@@ -117,6 +117,8 @@ export default {
               this.serverError = err
           }
 
+          this.$router.push('/login');
+
 
       },
     }

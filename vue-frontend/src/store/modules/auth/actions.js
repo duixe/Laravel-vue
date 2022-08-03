@@ -1,11 +1,15 @@
 import Axios  from 'axios';
-import { IS_LOGGED_IN_ACTION, LOGIN_ACTION, LOGOUT_ACTION, REGISTER_ACTION, SET_RESPONSE_TOKEN } from '../../storeconstants';
+import { IS_LOGGED_IN_ACTION, LOGIN_ACTION, LOGOUT_ACTION, REGISTER_ACTION, SET_RESPONSE_TOKEN, SET_USER_TASK_MUTATION } from '../../storeconstants';
 export default{
 
     [LOGOUT_ACTION](context) {
         context.commit(SET_RESPONSE_TOKEN, {
             access_token: null,
             user: null
+        });
+
+        context.commit(SET_USER_TASK_MUTATION, {
+            task: []
         });
 
         localStorage.removeItem('userData');

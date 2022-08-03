@@ -64,14 +64,14 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(TaskRequest $request, Task $task)
+    public function update(Request $request, Task $task)
     {
         $request->validate([
             'title' => ['filled'],
             'description' => ['filled'],
             'completed' => ['sometimes']
         ]);
-        $this->taskRepository->update($request->validated(), $task);
+        $this->taskRepository->update($request->all(), $task);
         return  new TaskResource($task->refresh()); 
     }
 
