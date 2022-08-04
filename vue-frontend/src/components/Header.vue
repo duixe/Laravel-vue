@@ -50,7 +50,8 @@ export default {
         console.log(error);
       }
        
-       this.$router.replace('/login')
+       this.$router.replace('/login');
+       this.$router.go({ name: 'Login' });// use this to completely restore the page
     }
   }
 }
