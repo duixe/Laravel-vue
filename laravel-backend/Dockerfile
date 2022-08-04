@@ -1,6 +1,6 @@
 FROM php:8.0-fpm-alpine
 
-RUN apt-get update -y && apt-get install -y openssl zip unzip git
+RUN apk add openssl zip unzip git
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filname=composer
 
@@ -10,5 +10,4 @@ RUN set -ex \
 
 WORKDIR /var/www/html
 COPY . .
-RUN composer install
 

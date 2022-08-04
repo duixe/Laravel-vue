@@ -1,2 +1,2 @@
-docker/posgres
-logs/nginx
+/docker/posgres
+/docker/logs/nginx
