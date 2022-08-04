@@ -1,23 +1,24 @@
 <template>
-  <div class="homes">
-    <!-- <div class="homes__profile">
-      <img :src="avatar_uri + user.name" class="homes__profile-img">
-      <div class="homes__profile-h3">
-        <h3>Welcome, {{ this.user.name }}</h3> <br>
-        <h3>Email: <i>{{ this.user.email }}</i></h3>
-      </div>
-    </div> -->
-    <div class="heading-secondary" v-if="tasks.length === 0">
+  <div class="homes" id="home">
+    <div class="heading-secondary" v-if="!tasks.length">
       <h3>Kindly, Create New Tasks to Populate your Dashboard</h3>
     </div>
     <FilterNav @filterChange="current = $event" :current="current" v-show="tasks.length"/>
     <div class="homes__task">
        <div v-if="tasks.length">
         <div v-for="task in filteredTasks" :key="task.id">
-          <SingleTask :task="task" @removeTask="handleRemovedTask" @complete="handleCompletedTask" />
+          <SingleTask :task="task" @removeTask="handleRemoveTask" @complete="handleCompletedTask" />
         </div>
       </div>
     </div>
+      <div class="modal" v-if="isDeleteOpen">
+          <div>
+              <h2 class="header-h">Delete Task</h2>
+              <p class="header-p">Are sure you want to delete task</p>
+              <a @click="isDeleteOpen = false" class="btn btn-primary" style="margin-right: 1rem">close</a>
+              <a @click="handleDelete()" class="btn btn-dark">Delete</a>
+          </div>
+      </div>
   </div>
 </template>
 
@@ -27,7 +28,7 @@ import SingleTask from '../components/SingleTask.vue';
 import FilterNav from '../components/FilterNav.vue';
 import axios from 'axios';
 import { mapActions, mapGetters } from 'vuex';
-import { GET_TASK_ACTION, GET_USER_DATA_GETTER, GET_USER_TASK_COMPLETED_GETTER, GET_USER_TASK_GETTER, GET_USER_TASK_ONGOING_GETTER, GET_USER_TOKEN_GETTER } from '../store/storeconstants';
+import { DELETE_TASK_ACTION, GET_TASK_ACTION, GET_USER_DATA_GETTER, GET_USER_TASK_COMPLETED_GETTER, GET_USER_TASK_GETTER, GET_USER_TASK_ONGOING_GETTER, GET_USER_TOKEN_GETTER } from '../store/storeconstants';
 import TaskVue from '../components/SingleTask.vue';
 export default {
     components: {
@@ -38,7 +39,9 @@ export default {
       return {
         // tasks: [],
         current: 'all',
-        avatar_uri: 'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name='
+        avatar_uri: 'https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=',
+        isDeleteOpen: false,
+        taskId: '',
       }
     },
     computed: {
@@ -63,32 +66,30 @@ export default {
       }
     },
     mounted() {
-      // axios
-      //     .get('/tasks')
-      //     .then((res) => {
-      //       this.tasks = res.data.data;
-      //     })
-      //     .catch(err => {
-      //       console.log(err);
-      //     });
-      
-        this.getUserTasks()
+      this.getUserTasks()
     },
     methods: {
       ...mapActions('task', {
-        getUserTasks: GET_TASK_ACTION
+        getUserTasks: GET_TASK_ACTION,
+        delete: DELETE_TASK_ACTION
       }),
-      handleRemovedTask(id) {
-        this.tasks = this.tasks.filter((task) => {
-          return task.id !== id;
-        })
+      async handleDelete(){
+        const param = {
+            id: this.taskId
+        };
+
+        try {
+            await this.delete(param);
+        } catch (err) {
+            // console.log(err) 
+        }
+
+        this.isDeleteOpen = false;
       },
-      handleCompletedTask(id) {
-        let cp = this.tasks.find((task) => {
-          return task.id === id;
-        })
-        cp.complete = !cp.complete;
-      }
+      handleRemoveTask(id) {
+        this.taskId = id;
+        this.isDeleteOpen = true;
+      },
     }
 }
 </script>

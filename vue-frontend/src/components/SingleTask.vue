@@ -1,5 +1,5 @@
 <template>
-  <div class="task" :class="{completed: task.complete}">
+  <div class="task" :class="{completed: task.completed}">
       <div class="actions">
           <h3 @click.prevent="showDesc = !showDesc">{{ task.title }}</h3>
           <div class="icons">
@@ -10,7 +10,7 @@
               <span @click.prevent="statusComplete()" class="material-icons">done</span>
           </div>
       </div>
-      <div class="description" v-if="showDesc">
+      <div class="description" v-if="showDesc && task.description">
           <p>{{ task.description }}</p>
       </div>
   </div>
@@ -24,24 +24,15 @@ export default {
     props: ["task"],
     data() {
         return {
-            showDesc: false
+            showDesc: false,
         }
     },
     methods: {
         ...mapActions('task', {
-            delete: DELETE_TASK_ACTION,
             taskCompleted: UPDATE_COMPLETE_STATUS
         }),
-        async deleteTask() {
-            const param = {
-                id: this.task.id
-            };
-
-            try {
-                await this.delete(param);
-            } catch (err) {
-                console.log(err)
-            }
+        deleteTask() {
+            this.$emit('removeTask', this.task.id);
         },
 
         async statusComplete() {
@@ -56,8 +47,6 @@ export default {
             } catch (err) {
                 console.log(err)
             }
-
-            console.log('got here');
         }
     }
 }

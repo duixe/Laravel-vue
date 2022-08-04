@@ -38,6 +38,29 @@
         font-size: 1.6rem;
     }
 
+    &-primary {
+        position: relative;
+        background: $color-pink;
+        background-clip: padding-box;
+        @include customFont($font-ubuntu-mono, $color-white, 400, 1.8rem);
+        box-shadow: 0 1rem 1rem rgba($color-black, .2);
+        transition: background .6 ease;
+
+        &::after {
+            background-color: $color-pink !important;
+        }
+       
+        
+
+        &:hover {
+            background: $color-blue;
+            color: $color-white !important;
+            background-clip: padding-box;
+        }
+
+        // @include buttonafter;
+    }
+
     &-secondary {
         background: transparent;
         background-clip: padding-box;

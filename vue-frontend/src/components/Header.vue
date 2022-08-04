@@ -42,8 +42,14 @@ export default {
     ...mapActions('auth', {
       logout: LOGOUT_ACTION
     }),
-    onLogout() {
-       this.logout();
+    async onLogout() {
+
+      try {
+        await this.logout();
+      } catch (error) {
+        console.log(error);
+      }
+       
        this.$router.replace('/login')
     }
   }

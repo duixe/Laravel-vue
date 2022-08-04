@@ -5,6 +5,7 @@ import Login from '/src/views/auth/Login.vue';
 import Home from '/src/views/Home.vue';
 import AddTask from '/src/views/AddTask.vue';
 import EditTask from '/src/views/EditTask.vue';
+import NotFound from '/src/views/NotFound.vue';
 import store from '../store/store';
 import { IS_USER_AUTHENTICATED_GETTER } from "../store/storeconstants";
 
@@ -39,7 +40,11 @@ const routes = [
         name: 'Login',
         component: Login,
         meta: {auth: false},
-    }
+    },
+    {   path: '/:pathMatch(.*)*', 
+        name: 'not-found', 
+        component: NotFound 
+    },
 
 ];
 

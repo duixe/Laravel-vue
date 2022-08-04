@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axiosClient from '../services/AxiosInstance'
 import { mapActions } from 'vuex';
 import { UPDATE_TASK_ACTION } from '../store/storeconstants';
 export default {
@@ -51,7 +51,7 @@ export default {
         }
     },
     mounted() {
-        axios
+        axiosClient
           .get(`/tasks/${this.id}`)
           .then((res) => {
             this.title = res.data.data.title;

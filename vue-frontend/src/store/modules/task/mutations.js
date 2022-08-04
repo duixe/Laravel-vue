@@ -14,6 +14,6 @@ export default{
             return task.id === payload.id;
           })
 
-          cp.complete = !cp.complete;
+          cp.completed = !cp.completed;
     }
 }

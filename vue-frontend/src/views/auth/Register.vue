@@ -45,7 +45,6 @@
                     required
                   >
                   <i class="uil uil-lock icon"></i>
-                  <i class="uil uil-eye-slash showHidePw"></i>
               </div>
               <div class="error" v-if="errors.password_confirmation"> 
                 {{ errors.password_confirmation }}
@@ -80,6 +79,7 @@ export default {
             password_confirmation: '',
             errors: [],
             serverError: '',
+            testing: ''
         }
     },
     methods: {
@@ -117,7 +117,9 @@ export default {
               this.serverError = err
           }
 
-          this.$router.push('/login');
+          if (this.serverError === '') {
+            this.$router.push({ path: 'login', query: { register: 'success' }});
+          }
 
 
       },

@@ -1,4 +1,5 @@
-import axios from "axios";
+// import axios from "axios";
+import axiosClient from '../../../services/AxiosInstance';
 import { 
     CREATE_TASK_ACTION, 
     DELETE_TASK_ACTION, 
@@ -19,7 +20,7 @@ export default{
 
         let res = ''
         try {
-            res = await axios.post('/tasks', data);
+            res = await axiosClient.post('/tasks', data);
         } catch (err) {
             let errMsg
             if (err.response.status === 401) {
@@ -51,7 +52,7 @@ export default{
 
         let res = ''
         try {
-            res = await axios.patch(`/tasks/${payload.id}`, data);
+            res = await axiosClient.patch(`/tasks/${payload.id}`, data);
         } catch (err) {
             let errMsg
             if (err.response.status === 401) {
@@ -82,7 +83,7 @@ export default{
        
         let res = ''
         try {
-            res = await axios.patch(`/tasks/${payload.id}`, data);
+            res = await axiosClient.patch(`/tasks/${payload.id}`, data);
         } catch (err) {
             let errMsg
             if (err.response.status === 401) {
@@ -109,7 +110,7 @@ export default{
     async [GET_TASK_ACTION](context, payload) {
         let res = ''
         try {
-            res = await axios.get('/tasks');
+            res = await axiosClient.get('/tasks');
         } catch (err) {
             let errMsg
             if (err.response.status === 401) {
@@ -134,7 +135,7 @@ export default{
     async [DELETE_TASK_ACTION](context, payload) {
         let res = ''
         try {
-            res = await axios.delete(`/tasks/${payload.id}`);
+            res = await axiosClient.delete(`/tasks/${payload.id}`);
         } catch (err) {
             let errMsg
             if (err.response.status === 401) {

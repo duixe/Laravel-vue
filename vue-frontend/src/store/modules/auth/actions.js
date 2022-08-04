@@ -1,18 +1,30 @@
 import Axios  from 'axios';
+import axiosClient from '../../../services/AxiosInstance';
 import { IS_LOGGED_IN_ACTION, LOGIN_ACTION, LOGOUT_ACTION, REGISTER_ACTION, SET_RESPONSE_TOKEN, SET_USER_TASK_MUTATION } from '../../storeconstants';
 export default{
 
-    [LOGOUT_ACTION](context) {
-        context.commit(SET_RESPONSE_TOKEN, {
-            access_token: null,
-            user: null
-        });
+    async [LOGOUT_ACTION](context) {
+        let res = ''
+        try {
+            res = await axiosClient.post('/logout', {});
+        } catch (err) {
+            throw err;
+        }
 
-        context.commit(SET_USER_TASK_MUTATION, {
-            task: []
-        });
+        if(res.status === 200) {
+            context.commit(SET_RESPONSE_TOKEN, {
+                access_token: null,
+                user: null
+            });
 
-        localStorage.removeItem('userData');
+            context.commit(SET_USER_TASK_MUTATION, {
+                tasks: []
+            });
+    
+            // delete Axios.defaults.headers.common["Authorization"];
+    
+            localStorage.removeItem('userData');   
+        }
     },
 
     [IS_LOGGED_IN_ACTION](context, payload) {
@@ -31,7 +43,7 @@ export default{
         
         let res = ''
         try {
-            res = await Axios.post('/login', data);
+            res = await axiosClient.post('/login', data);
         } catch (err) {
             let errMsg
             if (err.response.status === 401) {

@@ -23,7 +23,7 @@
                 <textarea
                     v-model="description"  
                     class="form__input" 
-                    placeholder="Desctiption" 
+                    placeholder="Description" 
                     id="description" 
                     required
                 ></textarea>

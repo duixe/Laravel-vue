@@ -1,6 +1,7 @@
 <template>
     <div class="auth">
         <div class="auth__forms">
+            <h1 v-if="regSuccess"> Registeration was Successful, Kindly Login</h1>
             <div class="auth__forms-error">{{ serverError }}</div>
             <div class="form login">
                 <span class="title">Login {{ name }}</span>
@@ -20,12 +21,19 @@
                         <input 
                             type="password" 
                             class="password" 
+                            ref="password"
                             placeholder="Enter your password"
                             v-model.trim="password"
                             required
                         >
-                        <i class="uil uil-lock icon"></i>
-                        <i class="uil uil-eye-slash showHidePw"></i>
+                        <i 
+                            class="uil uil-lock icon" 
+                        ></i>
+                        <i 
+                            class="uil showHidePw" 
+                            @click="togglePasswordVisibility()"
+                            :class="{'uil-eye': visibility, 'uil-eye-slash ': !visibility}"
+                            ></i>
                     </div>
                      <div class="error" v-if="errors.password"> {{ errors.password }}</div>
                     <div class="input-field button">
@@ -36,7 +44,7 @@
 
                 <div class="auth__text">
                     <span class="text">Not a member?
-                        <a href="#" class="text signup-link">Signup Now</a>
+                        <a href="/register" class="text signup-link">Signup Now</a>
                     </span>
                 </div>
             </div>
@@ -55,7 +63,17 @@ export default {
             email: '',
             password: '',
             errors: [],
-            serverError: ''
+            serverError: '',
+            visibility: false,
+            regSuccess: this.$route.query.register
+        }
+    },
+    watch: {
+        regSuccess: function() {
+            var vm = this;
+            setTimeout(function(value) {
+                vm.regSuccess = ''
+            }, 4000);
         }
     },
     methods: {
@@ -90,6 +108,15 @@ export default {
                 this.$router.push('/');
             }
 
+        },
+        togglePasswordVisibility() {
+            if (this.visibility === false) {
+                this.visibility = true;
+                this.$refs.password.type = 'text'; 
+            }else {
+                this.visibility = false;
+                this.$refs.password.type = 'password';
+            }
         }
     }
 }
