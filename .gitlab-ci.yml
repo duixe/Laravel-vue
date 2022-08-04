@@ -1,0 +1,9 @@
+build_composer:
+    image: edbizarro/gitlab-ci-pipeline-php:7.4
+    script:
+        - |
+            cd "$CI_PROJECT_DIR/laravel-backend"
+            composer install --prefer-dist --no-ansi --no-interaction --no-progress --no-scripts --no-suggest
+            cp .env.example .env
+            php artisan key:generate
+    
