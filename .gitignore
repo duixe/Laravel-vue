@@ -1,2 +1,1 @@
-/docker/postgres
-/docker/logs/nginx
+docker/postgres/
