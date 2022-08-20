@@ -4,23 +4,6 @@ networks:
   ionet:
 
 services:
-  server:
-    image: nginx:stable-alpine
-    container_name: IO_nginx
-    ports:
-      - "8000:80"
-    links:
-      - backend
-    volumes:
-      - ./laravel-backend:/var/www/html
-      - ./docker/nginx/site.conf:/etc/nginx/conf.d/default.conf:rw
-      - ./docker/logs/nginx:/var/logs/nginx:rw
-    depends_on:
-      - backend
-      - postgresdb
-    networks:
-      - ionet
-
   backend:
     build:
       context: ./laravel-backend
@@ -28,8 +11,12 @@ services:
     container_name: IO_backend
     volumes:
       - ./laravel-backend:/var/www/html
+    depends_on:
+      - postgresdb
     ports:
-      - "9001:9000"
+      - "8000:8000"
+    networks:
+      - ionet
 
   postgresdb:
     image: postgres:14-alpine
@@ -53,9 +40,10 @@ services:
     build:
       context: ./vue-frontend
       dockerfile: Dockerfile
+    container_name: IO_frontend
     tty: true
     ports:
-      - 5174:5173
+      - 5173:5173
     volumes:
       - ./vue-frontend:/app/vue-frontend
     depends_on:
